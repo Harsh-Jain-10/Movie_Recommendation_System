@@ -1,7 +1,3 @@
-"""
-Updated Flask Application - Works with OMDb, TMDB, or No API
-"""
-
 from flask import Flask, render_template, request, session, redirect, url_for, jsonify
 import json
 import os
@@ -252,4 +248,5 @@ if __name__ == '__main__':
     print("   3. Enjoy movie posters and descriptions!")
     print("="*70 + "\n")
     
+
     app.run(debug=True, host='0.0.0.0', port=5000)
