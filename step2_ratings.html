@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step 2: Rate Movies</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="progress-bar">
+            <div class="progress-step completed">✓</div>
+            <div class="progress-line completed"></div>
+            <div class="progress-step active">2</div>
+            <div class="progress-line"></div>
+            <div class="progress-step">3</div>
+        </div>
+
+        <h1>Rate these popular movies</h1>
+        <p class="subtitle">Rate at least 3 movies (1-5 stars)</p>
+
+        {% if error %}
+        <div class="error-message">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST" action="/step2" id="ratingsForm">
+            <div class="movies-list">
+                {% for movie in movies %}
+                <div class="movie-card">
+                    <div class="movie-info">
+                        <h3>{{ movie.title }}</h3>
+                        <p class="movie-genres">{{ movie.genres|replace('|', ' • ') }}</p>
+                    </div>
+                    <div class="rating-group">
+                        <label class="rating-option">
+                            <input type="radio" name="rating_{{ movie.movieId }}" value="1">
+                            <span class="star">★</span>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="rating_{{ movie.movieId }}" value="2">
+                            <span class="star">★★</span>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="rating_{{ movie.movieId }}" value="3">
+                            <span class="star">★★★</span>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="rating_{{ movie.movieId }}" value="4">
+                            <span class="star">★★★★</span>
+                        </label>
+                        <label class="rating-option">
+                            <input type="radio" name="rating_{{ movie.movieId }}" value="5">
+                            <span class="star">★★★★★</span>
+                        </label>
+                        <label class="rating-option not-watched">
+                            <input type="radio" name="rating_{{ movie.movieId }}" value="not_watched" checked>
+                            <span>Haven't Watched</span>
+                        </label>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="rating-counter" id="ratingCounter">
+                Rated: <span id="count">0</span> / 3 minimum
+            </div>
+
+            <div class="button-group">
+                <a href="/step1" class="btn btn-secondary">← Back</a>
+                <button type="submit" class="btn btn-primary" id="submitBtn">Next →</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('ratingsForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const counter = document.getElementById('count');
+        
+        function updateCount() {
+            const ratings = document.querySelectorAll('input[type="radio"]:checked');
+            const validRatings = Array.from(ratings).filter(r => r.value !== 'not_watched');
+            counter.textContent = validRatings.length;
+            
+            if (validRatings.length >= 3) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = `Next → (${validRatings.length} rated)`;
+            } else {
+                submitBtn.disabled = true;
+                submitBtn.textContent = `Rate at least ${3 - validRatings.length} more`;
+            }
+        }
+
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', updateCount);
+        });
+
+        updateCount();
+    </script>
+</body>
+</html>

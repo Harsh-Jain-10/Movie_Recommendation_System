@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step 3: Context & Mood</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="progress-bar">
+            <div class="progress-step completed">✓</div>
+            <div class="progress-line completed"></div>
+            <div class="progress-step completed">✓</div>
+            <div class="progress-line completed"></div>
+            <div class="progress-step active">3</div>
+        </div>
+
+        <h1>Tell us about your viewing context</h1>
+        <p class="subtitle">Help us fine-tune your recommendations</p>
+
+        <form method="POST" action="/step3" id="contextForm">
+            <!-- Mood Selection -->
+            <div class="form-section">
+                <h2>What's your current mood?</h2>
+                <div class="option-grid">
+                    <label class="option-card">
+                        <input type="radio" name="mood" value="Happy" required>
+                        <div class="option-content">
+                            <span class="option-emoji">😊</span>
+                            <span class="option-label">Happy</span>
+                            <span class="option-hint">Uplifting & Fun</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="mood" value="Sad">
+                        <div class="option-content">
+                            <span class="option-emoji">😢</span>
+                            <span class="option-label">Sad</span>
+                            <span class="option-hint">Emotional & Deep</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="mood" value="Adventurous">
+                        <div class="option-content">
+                            <span class="option-emoji">🚀</span>
+                            <span class="option-label">Adventurous</span>
+                            <span class="option-hint">Action & Thrills</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="mood" value="Relaxed">
+                        <div class="option-content">
+                            <span class="option-emoji">😌</span>
+                            <span class="option-label">Relaxed</span>
+                            <span class="option-hint">Chill & Easy</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Occasion Selection -->
+            <div class="form-section">
+                <h2>Who are you watching with?</h2>
+                <div class="option-grid">
+                    <label class="option-card">
+                        <input type="radio" name="occasion" value="Solo" required>
+                        <div class="option-content">
+                            <span class="option-emoji">🧘</span>
+                            <span class="option-label">Solo</span>
+                            <span class="option-hint">Me time</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="occasion" value="Date">
+                        <div class="option-content">
+                            <span class="option-emoji">💑</span>
+                            <span class="option-label">Date</span>
+                            <span class="option-hint">Romantic</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="occasion" value="Family">
+                        <div class="option-content">
+                            <span class="option-emoji">👨‍👩‍👧‍👦</span>
+                            <span class="option-label">Family</span>
+                            <span class="option-hint">All ages</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="occasion" value="Friends">
+                        <div class="option-content">
+                            <span class="option-emoji">👥</span>
+                            <span class="option-label">Friends</span>
+                            <span class="option-hint">Group fun</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Time Budget Selection -->
+            <div class="form-section">
+                <h2>How much time do you have?</h2>
+                <div class="option-grid">
+                    <label class="option-card">
+                        <input type="radio" name="time_budget" value="< 90 mins" required>
+                        <div class="option-content">
+                            <span class="option-emoji">⏱️</span>
+                            <span class="option-label">< 90 mins</span>
+                            <span class="option-hint">Quick watch</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="time_budget" value="< 2 hours">
+                        <div class="option-content">
+                            <span class="option-emoji">⏰</span>
+                            <span class="option-label">< 2 hours</span>
+                            <span class="option-hint">Standard</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="time_budget" value="No limit">
+                        <div class="option-content">
+                            <span class="option-emoji">🍿</span>
+                            <span class="option-label">No limit</span>
+                            <span class="option-hint">Marathon ready</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <a href="/step2" class="btn btn-secondary">← Back</a>
+                <button type="submit" class="btn btn-primary">Get Recommendations 🎬</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('contextForm');
+        const allRadios = document.querySelectorAll('input[type="radio"]');
+        
+        allRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                // Add visual feedback
+                this.closest('.option-card').classList.add('selected');
+                
+                // Remove selected class from siblings
+                const siblings = this.closest('.option-grid').querySelectorAll('.option-card');
+                siblings.forEach(card => {
+                    if (card !== this.closest('.option-card')) {
+                        card.classList.remove('selected');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
