@@ -1,8 +1,3 @@
-"""
-recommender.py - Movie Recommendation Engine (FIXED VERSION)
-Complete working version with all bug fixes
-"""
-
 import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -398,4 +393,5 @@ class MovieRecommender:
         except Exception as e:
             print(f"TMDB API Error for '{movie_title}': {e}")
         
+
         return None
