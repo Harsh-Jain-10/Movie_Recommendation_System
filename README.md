@@ -269,16 +269,6 @@ For issues, questions, or suggestions:
 
 ---
 
-## 📊 Statistics
-
-- **Lines of Code**: ~2,500
-- **Files**: 12
-- **Supported Genres**: 18+
-- **Recommendation Algorithm**: Hybrid (Content + Collaborative)
-- **API Support**: 3 options (OMDb, TMDB, Offline)
-- **Responsive**: Yes
-- **Mobile Friendly**: Yes
-
 ---
 
 ## 🎉 Get Started Now!
