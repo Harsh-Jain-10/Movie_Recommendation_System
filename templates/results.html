@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container results">
+        <div class="results-header">
+            <h1>🎬 Your Personalized Recommendations</h1>
+            <p class="subtitle">Based on your preferences and context</p>
+            
+            <div class="user-preferences">
+                <div class="pref-badge">
+                    <strong>Genres:</strong> {{ user_prefs.genres|join(', ') }}
+                </div>
+                <div class="pref-badge">
+                    <strong>Mood:</strong> {{ user_prefs.mood }}
+                </div>
+                <div class="pref-badge">
+                    <strong>Occasion:</strong> {{ user_prefs.occasion }}
+                </div>
+                <div class="pref-badge">
+                    <strong>Time:</strong> {{ user_prefs.time_budget }}
+                </div>
+            </div>
+        </div>
+
+        <div class="recommendations-grid">
+            {% for movie in movies %}
+            <div class="recommendation-card">
+                {% if movie.poster_url %}
+                <div class="movie-poster" style="background-image: url('{{ movie.poster_url }}');">
+                    <div class="movie-score">{{ "%.0f"|format(movie.score * 100) }}% Match</div>
+                </div>
+                {% else %}
+                <div class="movie-poster placeholder">
+                    <span class="poster-emoji">🎬</span>
+                    <div class="movie-score">{{ "%.0f"|format(movie.score * 100) }}% Match</div>
+                </div>
+                {% endif %}
+                
+                <div class="movie-details">
+                    <h3>{{ movie.title }}</h3>
+                    <p class="movie-meta">
+                        <span class="genre-tags">{{ movie.genres|replace('|', ' • ') }}</span>
+                        <span class="runtime">⏱ {{ movie.runtime }} min</span>
+                    </p>
+                    
+                    {% if movie.overview %}
+                    <p class="movie-overview">{{ movie.overview[:150] }}...</p>
+                    {% endif %}
+                    
+                    {% if movie.vote_average %}
+                    <div class="movie-rating">
+                        <span class="stars">★</span>
+                        <span>{{ movie.vote_average }}/10</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="action-buttons">
+            <a href="/" class="btn btn-secondary">← Start Over</a>
+            <button onclick="window.print()" class="btn btn-outline">🖨️ Save List</button>
+        </div>
+    </div>
+</body>
+</html>
