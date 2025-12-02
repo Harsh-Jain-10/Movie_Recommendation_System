@@ -1,5 +1,8 @@
-## Dataset Setup
-The `ratings.csv` file is too large to be uploaded here (~856 MB).
-1. Visit the **[GroupLens Website](https://grouplens.org/datasets/movielens/32m/)**.
-2. Download the file named **ml-32m.zip**.
-3. Extract the contents and move `ratings.csv` into this project folder.
+DATASET DOWNLOAD INSTRUCTIONS
+-----------------------------
+The 'ratings.csv' file is not included in this folder because it is too large (~856 MB).
+
+To get the full dataset:
+1. Go to the GroupLens website: https://grouplens.org/datasets/movielens/32m/
+2. Download the zip file named 'ml-32m.zip'.
+3. Extract the file 'ratings.csv' from that zip and place it in this folder.
