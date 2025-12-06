@@ -144,7 +144,6 @@
             radio.addEventListener('change', function() {
                 // Add visual feedback
                 this.closest('.option-card').classList.add('selected');
-                
                 // Remove selected class from siblings
                 const siblings = this.closest('.option-grid').querySelectorAll('.option-card');
                 siblings.forEach(card => {
@@ -156,4 +155,5 @@
         });
     </script>
 </body>
+
 </html>
