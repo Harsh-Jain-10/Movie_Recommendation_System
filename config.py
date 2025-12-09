@@ -1,6 +1,3 @@
-# ============================================================================
-# FILE: config.py
-# ============================================================================
 """
 Configuration settings for the Movie Recommendation System.
 """
@@ -60,3 +57,4 @@ DUMMY_USERS_COUNT = 100
 # 5. ADVANCED FEATURES
 # ==========================
 ENABLE_API_ENDPOINTS = True # Allows /api/recommend for external apps
+
