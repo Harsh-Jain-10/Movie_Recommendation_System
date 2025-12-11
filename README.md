@@ -79,7 +79,7 @@ cd movie_recommender
 ```
 
 #### 2. Install Dependencies
-
+ 
 ```bash
 pip install -r requirements.txt
 ```
