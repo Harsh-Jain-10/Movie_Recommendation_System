@@ -2,8 +2,6 @@ from flask import Flask, render_template, request, session, redirect, url_for, j
 import json
 import os
 import pandas as pd
-
-# Import recommender
 from recommender import MovieRecommender
 
 app = Flask(__name__)
@@ -250,3 +248,4 @@ if __name__ == '__main__':
     
 
     app.run(debug=True, host='0.0.0.0', port=5000)
+
